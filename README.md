@@ -134,31 +134,4 @@ Webhook-Receiver-Retry-Service/
 └── README.md        # Documentation
 ```
 
-## Example Usage
 
-```python
-import requests
-
-# Send webhook
-response = requests.post("http://localhost:8000/webhooks", json={
-    "event_id": "evt_001",
-    "event_type": "order.completed",
-    "payload": {"order_id": 12345, "amount": 99.99}
-})
-
-# List failed events
-failed = requests.get("http://localhost:8000/webhooks?status=failed")
-
-# Retry with force_success
-retry = requests.post("http://localhost:8000/webhooks/evt_001/retry")
-```
-
-## Production Considerations
-
-- Replace SQLite with PostgreSQL/MySQL for production
-- Add authentication/authorization
-- Implement rate limiting
-- Add monitoring and logging
-- Use async processing with Celery/RQ for heavy workloads
-- Add webhook signature verification
-- Implement exponential backoff for retries
